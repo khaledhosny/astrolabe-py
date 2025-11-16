@@ -1,0 +1,48 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools>=61.2",
+    "setuptools_scm",
+]
+
+[project]
+authors = [
+    { name = "Dominic Ford" },
+]
+dependencies = [
+    "cairocffi",
+    "numpy",
+    "scipy",
+]
+description = "Library for making your own cardboard model astrolabe."
+dynamic = [
+    "version",
+]
+license = "GPL-2.0-or-later"
+license-files = [
+    "LICENSE",
+]
+name = "astrolabe"
+requires-python = ">=3.8"
+
+[project.readme]
+content-type = "text/markdown"
+file = "README.md"
+
+[project.urls]
+Homepage = "https://github.com/dcf21/astrolabe"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-dir]
+"" = "Lib"
+
+[tool.setuptools.packages.find]
+where = ["Lib"]
+namespaces = false
+
+[tool.setuptools_scm]
+
+[tool.wheel]
+universal = "1"

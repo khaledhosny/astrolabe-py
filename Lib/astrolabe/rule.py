@@ -24,10 +24,10 @@ Render the rule and the alidade of the astrolabe.
 from math import sin, tan
 from typing import Dict, Tuple
 
-from constants import unit_deg, unit_cm, unit_mm, inclination_ecliptic, centre_scaling, r_1, d_12
-from graphics_context import BaseComponent, GraphicsContext
-from settings import fetch_command_line_arguments
-from themes import themes
+from .constants import unit_deg, unit_cm, unit_mm, inclination_ecliptic, centre_scaling, r_1, d_12
+from .graphics_context import BaseComponent, GraphicsContext
+from .settings import fetch_command_line_arguments
+from .themes import themes
 
 
 class Rule(BaseComponent):

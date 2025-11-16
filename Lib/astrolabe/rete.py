@@ -24,13 +24,13 @@ Render the rete of the astrolabe.
 from math import pi, sin, tan, cos, asin, floor
 from typing import Dict
 
-from bright_stars_process import fetch_bright_star_list
-from constants import unit_deg, unit_rev, unit_mm, inclination_ecliptic, centre_scaling, r_1, d_12, line_width_base
-from graphics_context import BaseComponent, GraphicsContext
+from .bright_stars_process import fetch_bright_star_list
+from .constants import unit_deg, unit_rev, unit_mm, inclination_ecliptic, centre_scaling, r_1, d_12, line_width_base
+from .graphics_context import BaseComponent, GraphicsContext
 from numpy import arange
-from settings import fetch_command_line_arguments
-from text import text
-from themes import themes
+from .settings import fetch_command_line_arguments
+from .text import text
+from .themes import themes
 
 
 class Rete(BaseComponent):

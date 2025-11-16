@@ -24,12 +24,12 @@ Render the climate of the astrolabe.
 from math import pi, sin, tan, cos, atan2, hypot, acos
 from typing import Dict
 
-from constants import unit_deg, unit_cm, unit_mm, inclination_ecliptic, centre_scaling, r_1, d_12, tab_size
-from graphics_context import BaseComponent, GraphicsContext
+from .constants import unit_deg, unit_cm, unit_mm, inclination_ecliptic, centre_scaling, r_1, d_12, tab_size
+from .graphics_context import BaseComponent, GraphicsContext
 from numpy import arange
-from settings import fetch_command_line_arguments
-from text import text
-from themes import themes
+from .settings import fetch_command_line_arguments
+from .text import text
+from .themes import themes
 
 
 class Climate(BaseComponent):

@@ -24,11 +24,11 @@ Render the front of the mother of the astrolabe.
 from math import pi, sin, cos, acos, floor
 from typing import Dict, Tuple
 
-from constants import unit_deg, unit_rev, unit_cm, centre_scaling, r_1, d_12, tab_size
-from graphics_context import BaseComponent, GraphicsContext
+from .constants import unit_deg, unit_rev, unit_cm, centre_scaling, r_1, d_12, tab_size
+from .graphics_context import BaseComponent, GraphicsContext
 from numpy import arange
-from settings import fetch_command_line_arguments
-from themes import themes
+from .settings import fetch_command_line_arguments
+from .themes import themes
 
 
 class MotherFront(BaseComponent):

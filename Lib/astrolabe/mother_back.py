@@ -24,13 +24,13 @@ Render the back of the mother of the astrolabe.
 from math import pi, sin, tan, cos, acos, atan, atan2, floor
 from typing import Dict
 
-from constants import unit_deg, unit_rev, unit_cm, unit_mm, centre_scaling, r_1, d_12
-from graphics_context import BaseComponent
+from .constants import unit_deg, unit_rev, unit_cm, unit_mm, centre_scaling, r_1, d_12
+from .graphics_context import BaseComponent
 from numpy import arange
-from settings import fetch_command_line_arguments
-from text import text
-from themes import themes
-import calendar
+from .settings import fetch_command_line_arguments
+from .text import text
+from .themes import themes
+from . import calendar
 import scipy.interpolate
 
 

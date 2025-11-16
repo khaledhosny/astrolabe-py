@@ -27,7 +27,7 @@ from math import pi, sin, cos
 from typing import Dict, List, Optional, Sequence, Union
 
 import cairocffi as cairo
-from constants import unit_deg, unit_mm, font_size_base, line_width_base, dots_per_inch
+from .constants import unit_deg, unit_mm, font_size_base, line_width_base, dots_per_inch
 
 
 class GraphicsPage:

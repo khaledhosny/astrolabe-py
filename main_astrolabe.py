@@ -30,14 +30,14 @@ import subprocess
 import time
 from typing import Dict, Union
 
-import text
-from climate import Climate
-from graphics_context import GraphicsPage, CompositeComponent
-from mother_back import MotherBack
-from mother_front import MotherFront
-from rete import Rete
-from rule import Rule
-from settings import fetch_command_line_arguments
+from astrolabe import text
+from astrolabe.climate import Climate
+from astrolabe.graphics_context import GraphicsPage, CompositeComponent
+from astrolabe.mother_back import MotherBack
+from astrolabe.mother_front import MotherFront
+from astrolabe.rete import Rete
+from astrolabe.rule import Rule
+from astrolabe.settings import fetch_command_line_arguments
 
 # Create clean output directory
 os.system("rm -Rf output")
