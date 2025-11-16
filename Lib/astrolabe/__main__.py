@@ -28,7 +28,7 @@ import subprocess
 import time
 from typing import Dict, Union
 
-from . import text
+from . import latex_template, text
 from .climate import Climate
 from .graphics_context import CompositeComponent, GraphicsPage
 from .mother_back import MotherBack
@@ -78,31 +78,46 @@ def make(args):
                     }
 
                     # Render the parts of the astrolabe that do not change with geographic location
+                    mother_front_filename: pathlib.Path = (
+                        dir_parts
+                        / "mother_front_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
+                            **subs
+                        )
+                    )
                     MotherFront(settings=settings).render_to_file(
-                        filename="{dir_parts}/mother_front_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
-                            **subs
-                        ),
+                        filename=mother_front_filename,
                         img_format=img_format,
                     )
 
+                    mother_back_filename: pathlib.Path = (
+                        dir_parts
+                        / "mother_back_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
+                            **subs
+                        )
+                    )
                     MotherBack(settings=settings).render_to_file(
-                        filename="{dir_parts}/mother_back_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
-                            **subs
-                        ),
-                        img_format=img_format,
+                        filename=mother_back_filename, img_format=img_format
                     )
 
+                    rete_filename: pathlib.Path = (
+                        dir_parts
+                        / "rete_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
+                            **subs
+                        )
+                    )
                     Rete(settings=settings).render_to_file(
-                        filename="{dir_parts}/rete_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
-                            **subs
-                        ),
+                        filename=rete_filename,
                         img_format=img_format,
                     )
 
-                    Rule(settings=settings).render_to_file(
-                        filename="{dir_parts}/rule_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
+                    rule_filename: pathlib.Path = (
+                        dir_parts
+                        / "rule_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
                             **subs
-                        ),
+                        )
+                    )
+                    Rule(settings=settings).render_to_file(
+                        rule_filename,
                         img_format=img_format,
                     )
 
@@ -115,6 +130,12 @@ def make(args):
                     )
 
                     # Make combined mother and climate
+                    mother_front_combi_filename: pathlib.Path = (
+                        dir_parts
+                        / "mother_front_combi_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
+                            **subs
+                        )
+                    )
                     CompositeComponent(
                         settings=settings,
                         components=[
@@ -122,11 +143,24 @@ def make(args):
                             Climate(settings=settings),
                         ],
                     ).render_to_file(
-                        filename="{dir_parts}/mother_front_combi_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}".format(
-                            **subs
-                        ),
+                        filename=mother_front_combi_filename,
                         img_format=img_format,
                     )
+
+                    doc = latex_template.template.format(
+                        latitude=r"${abs_lat:d}^\circ${ns}".format(**subs),
+                        mother_back=mother_back_filename.absolute(),
+                        mother_front=mother_front_combi_filename.absolute(),
+                        rule=rule_filename.absolute(),
+                        rete=rete_filename.absolute(),
+                    )
+                    with open(
+                        "{dir_out}/astrolabe_{abs_lat:02d}{ns}_{lang}_{astrolabe_type}.tex".format(
+                            **subs
+                        ),
+                        "w",
+                    ) as f:
+                        f.write(doc)
 
 
 def main():
