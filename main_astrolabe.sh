@@ -22,17 +22,19 @@ rm -Rf __pycache__ *.pyc output
 rm -Rf doc/*.aux doc/*.dvi doc/*.log doc/*.pdf doc/*.ps doc/tmp doc/*.out
 
 # Run the python 3 script which generates astrolabe models for a wide range of latitudes
+latitudes=""
 for lat in $(seq -80 5 90); do
 	# Do not make equatorial astrolabes, as they don't really work
 	if [ -10 -lt $lat -a $lat -lt 10 ]; then continue; fi
-
-	python3 -m astrolabe --latitudes "$lat" --types full simplified --formats pdf svg png
+	latitudes="$latitudes $lat"
 done
+
+python3 -m astrolabe --latitudes $latitudes --types full simplified --formats pdf svg png
 
 pushd output/astrolabes
 for ltx in *.tex; do
 	for pass in $(seq 3); do
-		pdflatex $ltx
+		pdflatex --interaction=batchmode $ltx
 	done
 done
 
