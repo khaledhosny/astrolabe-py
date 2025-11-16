@@ -29,7 +29,7 @@ for lat in $(seq -80 5 90); do
 	latitudes="$latitudes $lat"
 done
 
-python3 -m astrolabe --latitudes $latitudes --types full simplified --formats pdf svg png
+python3 -m astrolabe --latitudes $latitudes --types full simplified --formats pdf svg png $@
 
 pushd output/astrolabes
 for ltx in *.tex; do
