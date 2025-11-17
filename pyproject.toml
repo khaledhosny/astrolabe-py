@@ -18,7 +18,7 @@ description = "Library for making your own cardboard model astrolabe."
 dynamic = [
     "version",
 ]
-license = "GPL-2.0-or-later"
+license = "GPL-3.0"
 license-files = [
     "LICENSE",
 ]
