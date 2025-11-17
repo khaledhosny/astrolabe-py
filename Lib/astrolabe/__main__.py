@@ -22,6 +22,7 @@ to build an astrolabe for that latitude, and instructions as to how to put them 
 """
 
 import argparse
+import logging
 from importlib import resources
 from pathlib import Path
 from typing import Dict, Optional, Union
@@ -123,10 +124,9 @@ def make(args):
                         rule=rule_filename.with_suffix(ext),
                         rete=rete_filename.with_suffix(ext),
                     )
-                    typst.compile(
-                        doc.encode("utf-8"),
-                        output=dir_out / f"astrolabe_{suffix}.pdf",
-                    )
+                    pdf_filename: Path = dir_out / f"astrolabe_{suffix}.pdf"
+                    logging.info(f"Creating file <{pdf_filename}>")
+                    typst.compile(doc.encode("utf-8"), output=pdf_filename)
 
 
 def main():
@@ -177,7 +177,11 @@ def main():
         default="default",
         help="Color theme to be used in the astrolabe.",
     )
+    parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
+
+    if args.verbose:
+        logging.basicConfig(level=logging.INFO)
 
     return make(args)
 
