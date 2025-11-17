@@ -135,7 +135,7 @@ def main():
         "--latitudes",
         dest="latitudes",
         type=int,
-        default=[52],
+        default=[30],
         nargs="*",
         help="The latitude to create a astrolabe for.",
     )
@@ -159,7 +159,7 @@ def main():
         "--formats",
         dest="img_formats",
         choices=GraphicsPage.supported_formats(),
-        default=["png"],
+        default=["pdf"],
         nargs="*",
         help="The image format to create.",
     )
