@@ -10,7 +10,7 @@
   footer: align(
     center,
     text(size: 8pt, weight: "bold")[
-      #sym.copyright 2010--2024 Dominic Ford.
+      #sym.copyright 2010--#datetime.today().year() Dominic Ford.
       Distributed under the GNU General Public License, version 3.\
       Document downloaded from
       #link("https://in-the-sky.org/astrolabe/index.html")
@@ -30,7 +30,7 @@
 #maketitle(
   title: "Make your own Model Astrolabe",
   authors: ("Dominic Ford",),
-  date: "2010—2024",
+  date: [2010--#datetime.today().year()],
   metadata: true,
 )
 
