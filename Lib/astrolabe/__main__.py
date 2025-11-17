@@ -22,10 +22,13 @@ to build an astrolabe for that latitude, and instructions as to how to put them 
 """
 
 import argparse
+from importlib import resources
 from pathlib import Path
-from typing import Dict, Union
+from typing import Dict, Optional, Union
 
-from . import latex_template, text
+import typst
+
+from . import text
 from .climate import Climate
 from .graphics_context import CompositeComponent, GraphicsPage
 from .mother_back import MotherBack
@@ -105,15 +108,25 @@ def make(args):
                         img_format=img_format,
                     )
 
-                    doc = latex_template.template.format(
-                        latitude=rf"${abs_lat:d}^\circ${ns}",
-                        mother_back=mother_back_filename.absolute(),
-                        mother_front=mother_front_combi_filename.absolute(),
-                        rule=rule_filename.absolute(),
-                        rete=rete_filename.absolute(),
+                ext: Optional[str] = None
+                if "pdf" in args.img_formats:
+                    ext = ".pdf"
+                elif "svg" in args.img_formats:
+                    ext = ".svg"
+                elif "png" in args.img_formats:
+                    ext = ".png"
+                if ext is not None:
+                    doc = resources.read_text(__package__, "data/template.typ").format(
+                        latitude=rf"{abs_lat:d}°{ns}",
+                        mother_back=mother_back_filename.with_suffix(ext),
+                        mother_front=mother_front_combi_filename.with_suffix(ext),
+                        rule=rule_filename.with_suffix(ext),
+                        rete=rete_filename.with_suffix(ext),
                     )
-                    with open(f"{dir_out}/astrolabe_{suffix}.tex", "w") as f:
-                        f.write(doc)
+                    typst.compile(
+                        doc.encode("utf-8"),
+                        output=dir_out / f"astrolabe_{suffix}.pdf",
+                    )
 
 
 def main():

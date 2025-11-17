@@ -16,3 +16,5 @@ pycparser==2.23
     # via cffi
 scipy==1.16.3
     # via -r requirements.in
+typst==0.14.1
+    # via -r requirements.in

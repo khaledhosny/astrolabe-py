@@ -13,6 +13,7 @@ dependencies = [
     "cairocffi",
     "numpy",
     "scipy",
+    "typst",
 ]
 description = "Library for making your own cardboard model astrolabe."
 dynamic = [

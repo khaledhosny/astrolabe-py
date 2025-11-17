@@ -32,12 +32,6 @@ done
 python3 -m astrolabe --latitudes $latitudes --types full simplified --formats pdf svg png $@
 
 pushd output/astrolabes
-for ltx in *.tex; do
-	for pass in $(seq 3); do
-		pdflatex --interaction=batchmode $ltx
-	done
-done
-
 for pdf in *_en_full.pdf; do
 	ln -s $pdf ${pdf//_en_full/};
 done
