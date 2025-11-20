@@ -135,8 +135,8 @@ def main():
         "--latitudes",
         dest="latitudes",
         type=int,
-        default=[30],
-        nargs="*",
+        nargs="+",
+        required=True,
         help="The latitude to create a astrolabe for.",
     )
     parser.add_argument(
@@ -144,7 +144,7 @@ def main():
         dest="astrolabe_types",
         choices=["full", "simplified"],
         default=["full"],
-        nargs="*",
+        nargs="+",
         help="The astrolabe type to create.",
     )
     parser.add_argument(
@@ -152,7 +152,7 @@ def main():
         dest="languages",
         choices=text.text.keys(),
         default=["en"],
-        nargs="*",
+        nargs="+",
         help="The language to create a astrolabe for.",
     )
     parser.add_argument(
@@ -160,7 +160,7 @@ def main():
         dest="img_formats",
         choices=GraphicsPage.supported_formats(),
         default=["pdf"],
-        nargs="*",
+        nargs="+",
         help="The image format to create.",
     )
     parser.add_argument(
